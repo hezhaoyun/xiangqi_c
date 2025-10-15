@@ -15,7 +15,7 @@ This project serves not only as a capable Xiangqi AI but also as an excellent ed
 
 ### 简体中文
 
-**Xiangqi (迷你象棋)** 是一个从零开始、逐步构建的现代化中国象棋引擎。项目最初旨在学习和实践 NegaMax 搜索算法，随着研究的深入，我们不断融入多种现代象棋引擎的核心技术，使其具备了完善的对弈能力与精准的评估体系。
+**Xiangqi (象棋)** 是一个从零开始、逐步构建的现代化中国象棋引擎。项目最初旨在学习和实践 NegaMax 搜索算法，随着研究的深入，我们不断融入多种现代象棋引擎的核心技术，使其具备了完善的对弈能力与精准的评估体系。
 
 该项目不仅是一个功能强大的象棋 AI，也是一个绝佳的学习资源，清晰地展示了棋类 AI 从基础算法到高级优化的完整实现过程。
 
@@ -49,25 +49,24 @@ The project is organized into two main parts: the core engine source code and ex
 
 - **`/src`**: Contains all the Python source code for the Xiangqi engine itself, including search algorithms, evaluation functions, and board representation.
 - **`/scripts`**: Includes utility scripts, such as `create_opening_book.py`, which processes data to generate the engine's opening book.
-- **`/external/xq_data`**: A Git submodule containing a large community-maintained database of Xiangqi game records. This data is used by the `create_opening_book.py` script to build a comprehensive opening library for the engine.
-
 ---
 
 ## Getting Started (如何开始)
 
 1.  **Clone the repository & submodules:**
     ```bash
-    git clone --recursive https://github.com/hezhaoyun/minixiangqi.git
-    cd minixiangqi
+    git clone https://github.com/hezhaoyun/xiangqi_c.git
+    cd xiangqi_c
     ```
 
-2.  **Create Opening Book:**
+2.  **Create Opening Book from 'opening_book.json' (generated in relation project: https://github.com/hezhaoyun/xiangqi_py.git):**
     ```bash
-    python -m scripts.create_opening_book
+    python -m scripts.create_binary_book
     ```
-3.  **Run the game with a sample GUI (R: Restart, U: Undo):**
+
+3.  **Run the game with a sample Text-UI:**
     ```bash
-    python -m src.main
+    make && ./xiangqi
     ```
 
 ---
