@@ -1,4 +1,3 @@
-
 # Compiler and flags
 CC = gcc
 CFLAGS = -Wall -Wextra -g -O2 -std=c11
@@ -7,24 +6,37 @@ LDFLAGS =
 # Project name
 TARGET = xiangqi
 
-# Source files
+# Directories
 SRCDIR = src
-SOURCES = $(wildcard $(SRCDIR)/*.c)
-OBJECTS = $(SOURCES:.c=.o) $(SRCDIR)/tt.o
-
-# Include directories
+BINDIR = bin
 INCLUDEDIR = src
+
+# Executable path
+TARGET_EXEC = $(BINDIR)/$(TARGET)
+
+# Source files and object files
+SOURCES = $(wildcard $(SRCDIR)/*.c)
+OBJECTS = $(patsubst $(SRCDIR)/%.c,$(BINDIR)/%.o,$(SOURCES))
+
+# Add include directory to CFLAGS
 CFLAGS += -I$(INCLUDEDIR)
 
 .PHONY: all clean
 
-all: $(TARGET)
+all: $(TARGET_EXEC)
 
-$(TARGET): $(OBJECTS)
+# Rule to link the executable
+$(TARGET_EXEC): $(OBJECTS)
+	@echo "Linking..."
+	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
-%.o: %.c
+# Rule to compile C source files into object files
+$(BINDIR)/%.o: $(SRCDIR)/%.c
+	@echo "Compiling $<..."
+	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	rm -f $(SRCDIR)/*.o $(TARGET)
+	@echo "Cleaning up..."
+	rm -rf $(BINDIR)
